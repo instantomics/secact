@@ -1,0 +1,40 @@
+schema_version = 1
+
+[reference]
+id = "secact"
+repository = "git@github.com:instantomics/secact.git"
+
+[candidate]
+draft = "candidate"
+
+[[integrations]]
+task_id = "ligand_activity"
+interface_id = "ligand_activity.candidate:1"
+default_preset = "secact"
+
+[[integrations.presets]]
+id = "secact"
+parameters = { cytosig_fallback = false }
+
+[[integrations.presets]]
+id = "secact_cytosig"
+parameters = { cytosig_fallback = true }
+
+[execution]
+entrypoint = "run_reference.py"
+api_version = 1
+allowed_tools = ["freeze_candidate", "validate_model", "evaluate", "wait_job", "inspect_job"]
+max_tool_calls = 40
+timeout_seconds = 1800
+
+[environment]
+kind = "uv"
+project_root = "."
+lock = "uv.lock"
+
+[resources]
+cpus = 8
+memory_bytes = 34359738368
+walltime_seconds = 2400
+gpus = 0
+temporary_storage_bytes = 8589934592

@@ -59,3 +59,8 @@ it induces. On the Immune Dictionary training slice, IFN-γ responses are
 attributed to CXCL10, CXCL11 and CCL8 ahead of IFN-γ itself. Target signatures
 describe tumour tissue rather than any receiver cell type, so the method cannot
 predict cell-type-specific targets.
+
+On validation, SecAct ranks ligands less well than NicheNet and than the
+generic responder, and it earns almost no unsigned target credit. Its signed
+signatures earn some direction credit, which NicheNet cannot, and the CytoSig
+fallback improves both components.

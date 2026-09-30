@@ -14,7 +14,6 @@ conflicts = [[
 
 [manifest]
 constraints = [{ name = "google-crc32c", specifier = "<1.9" }]
-overrides = [{ name = "numpy", specifier = ">=2" }]
 
 [[package]]
 name = "anndata"
@@ -731,14 +730,14 @@ requires-dist = [
     { name = "pandas" },
     { name = "pyarrow" },
     { name = "scipy" },
-    { name = "secactpy", specifier = "==0.3.1" },
+    { name = "secactpy", url = "https://github.com/instantomics/secact/releases/download/secactpy-wheel-v0.3.1/secactpy-0.3.1%2Bnumpy2-py3-none-any.whl" },
 ]
 provides-extras = ["cpu", "cu128", "cu130"]
 
 [[package]]
 name = "secactpy"
-version = "0.3.1"
-source = { registry = "https://pypi.org/simple" }
+version = "0.3.1+numpy2"
+source = { url = "https://github.com/instantomics/secact/releases/download/secactpy-wheel-v0.3.1/secactpy-0.3.1%2Bnumpy2-py3-none-any.whl" }
 dependencies = [
     { name = "anndata" },
     { name = "h5py" },
@@ -747,10 +746,34 @@ dependencies = [
     { name = "scanpy" },
     { name = "scipy" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/9d/d8/58302af42b5d0cb9ae72033d27e6cb920f73f98ba9f4ce6f7fa90eb82355/secactpy-0.3.1.tar.gz", hash = "sha256:80c1074572670efb97a0e60a1f13109d8cf48f6db9c1584760b39a5a00f0a117", size = 81815834, upload-time = "2026-05-14T11:00:59.401Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d1/0c/936a4a246f411644be4f913073812806d613c520c8e641edeec26477d1d9/secactpy-0.3.1-py3-none-any.whl", hash = "sha256:8b8b59294178285b3d1ed5f3cd288243eed3d1e4d630ad4b35a201484dea553b", size = 81780157, upload-time = "2026-05-14T11:00:55.474Z" },
+    { url = "https://github.com/instantomics/secact/releases/download/secactpy-wheel-v0.3.1/secactpy-0.3.1%2Bnumpy2-py3-none-any.whl", hash = "sha256:0e1fb94f3a7bef5663108b4357cc99883cbc0dc1919d898f3ab6d64eae1dc79c" },
 ]
+
+[package.metadata]
+requires-dist = [
+    { name = "anndata", specifier = ">=0.8.0" },
+    { name = "argparse-manpage", marker = "extra == 'docs'" },
+    { name = "black", marker = "extra == 'dev'", specifier = ">=23.0.0" },
+    { name = "cupy-cuda11x", marker = "extra == 'gpu'", specifier = ">=10.0.0" },
+    { name = "dash", marker = "extra == 'app'", specifier = ">=2.9.0" },
+    { name = "dash-bootstrap-components", marker = "extra == 'app'", specifier = ">=1.4.0" },
+    { name = "h5py", specifier = ">=3.0.0" },
+    { name = "lifelines", marker = "extra == 'downstream'", specifier = ">=0.27.0" },
+    { name = "mkdocs", marker = "extra == 'docs'", specifier = ">=1.5.0" },
+    { name = "mkdocs-material", marker = "extra == 'docs'", specifier = ">=9.0.0" },
+    { name = "numpy", specifier = ">=1.20.0" },
+    { name = "pandas", specifier = ">=1.3.0" },
+    { name = "plotly", marker = "extra == 'app'", specifier = ">=5.14.0" },
+    { name = "plotly", marker = "extra == 'viz'", specifier = ">=5.14.0" },
+    { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },
+    { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.0.0" },
+    { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.1.0" },
+    { name = "scanpy", specifier = ">=1.9.0" },
+    { name = "scikit-learn", marker = "extra == 'downstream'", specifier = ">=1.0.0" },
+    { name = "scipy", specifier = ">=1.7.0" },
+]
+provides-extras = ["gpu", "dev", "docs", "viz", "downstream", "app"]
 
 [[package]]
 name = "session-info2"

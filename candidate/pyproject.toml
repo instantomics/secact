@@ -8,7 +8,8 @@ version = "0.0.0"
 description = "Ordinary Iomix ligand_activity candidate wrapping SecActpy"
 requires-python = ">=3.13,<3.14"
 dependencies = [
-  "secactpy==0.3.1",
+  # SecActpy 0.3.1 with only its numpy<2 cap lifted; see the README.
+  "secactpy @ https://github.com/instantomics/secact/releases/download/secactpy-wheel-v0.3.1/secactpy-0.3.1%2Bnumpy2-py3-none-any.whl",
   "numpy",
   "pandas",
   "pyarrow",
@@ -23,9 +24,6 @@ cu130 = []
 [tool.uv]
 # The task pins google-crc32c<1.9: 1.9.0 was published without Linux wheels.
 constraint-dependencies = ["google-crc32c<1.9"]
-# secactpy 0.3.1 caps numpy below 2, which has no Python 3.13 wheels; its code
-# uses no API that numpy 2 removed.
-override-dependencies = ["numpy>=2"]
 conflicts = [
   [
     { extra = "cpu" },

@@ -7,7 +7,7 @@ dependencies = []
 
 [dependency-groups]
 dev = [
-  "secactpy==0.3.1",
+  "secactpy @ https://github.com/instantomics/secact/releases/download/secactpy-wheel-v0.3.1/secactpy-0.3.1%2Bnumpy2-py3-none-any.whl",
   "pyarrow",
   "pytest==9.1.1",
   "ruff==0.12.8",
@@ -15,7 +15,6 @@ dev = [
 
 [tool.uv]
 package = false
-override-dependencies = ["numpy>=2"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -42,8 +42,12 @@ package, so the candidate needs no training or pretrained artifact.
   outside the signatures get probability 0 and direction 0.5.
 - **Loss of signalling.** Loss conditions negate ligand z-scores and flip target
   direction.
-- SecActpy caps numpy below 2, which has no Python 3.13 wheels. The candidate
-  overrides that cap; SecActpy uses no numpy API that version 2 removed.
+- SecActpy caps numpy below 2, which has no Python 3.13 wheels, and candidate
+  environments cannot override a dependency's metadata. The candidate therefore
+  pins the `secactpy-wheel-v0.3.1` release asset of this repository, which
+  [`scripts/build_secactpy_wheel.py`](scripts/build_secactpy_wheel.py) builds
+  from the upstream PyPI wheel by removing only that cap. SecActpy uses no numpy
+  API that version 2 removed.
 
 The method is deterministic and uses no training data, so the candidate is
 predict-only and the reference does not run the task's train route.

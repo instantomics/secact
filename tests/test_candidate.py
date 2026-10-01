@@ -15,8 +15,7 @@ SOURCE = Path(__file__).parents[1] / "candidate" / "src" / "mymodel"
 @dataclass(frozen=True)
 class Prediction:
     ligand_scores: np.ndarray
-    target_probability: np.ndarray
-    up_probability: np.ndarray
+    target_log2fc: np.ndarray
 
 
 def load_api(monkeypatch):
@@ -139,6 +138,6 @@ def test_predict_signs_loss_and_falls_back_to_cytosig(monkeypatch):
     np.testing.assert_array_equal(alone.ligand_scores[:, :2], both.ligand_scores[:, :2])
 
     # Loss of Tnf lowers the genes its signature raises.
-    up = both.up_probability[0]
-    assert up[list(blocks["a"])].max() < 0.5 < up[list(blocks["b"])].min()
-    assert both.target_probability[0, list(blocks["a"])].min() > 0.9
+    fold = both.target_log2fc[0]
+    assert fold[list(blocks["a"])].max() < 0 < fold[list(blocks["b"])].min()
+    assert fold[list(blocks["a"])].max() < -0.9

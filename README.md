@@ -35,11 +35,10 @@ package, so the candidate needs no training or pretrained artifact.
   permutations. Ligands rank by activity z-score. Ligands without a signature
   rank below every ligand with one. SecAct scores secreted proteins, not
   receptor usage, so receptor expression is not used.
-- **Target queries.** A gene's target probability is the absolute signature
-  weight of the query ligand, scaled by that ligand's largest absolute weight;
-  its up-regulation probability maps the signed scaled weight to [0, 1]. With
-  several ligands, the ligand with the largest absolute weight decides. Genes
-  outside the signatures get probability 0 and direction 0.5.
+- **Target queries.** A gene's predicted log2 fold change is the query
+  ligand's signature weight, scaled by that ligand's largest absolute weight.
+  With several ligands, the ligand with the largest absolute weight decides.
+  Genes outside the signatures get 0.
 - **Loss of signalling.** Loss conditions negate ligand z-scores and flip target
   direction.
 - SecActpy caps numpy below 2, which has no Python 3.13 wheels, and candidate

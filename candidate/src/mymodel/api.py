@@ -127,8 +127,7 @@ def ligand_scores(dataset, queries, universe, chosen):
 def target_predictions(dataset, queries, chosen):
     """Signature weight scaled per ligand to [-1, 1]; strongest ligand wins.
 
-    The probability of being a target is the absolute scaled weight, and the
-    probability of going up maps the signed weight to [0, 1].
+    The signed scaled weight stands in for the gene's log2 fold change.
     """
     symbols = dataset.table("genes").gene.str.upper()
     weights = {}
@@ -145,8 +144,7 @@ def target_predictions(dataset, queries, chosen):
             if values is not None:
                 stronger = np.abs(values) > np.abs(scaled[i])
                 scaled[i, stronger] = values[stronger]
-    scaled *= sign(queries)[:, None]
-    return np.clip(np.abs(scaled), 0, 1), np.clip((1 + scaled) / 2, 0, 1)
+    return scaled * sign(queries)[:, None]
 
 
 def predict(inputs, config):
@@ -155,7 +153,6 @@ def predict(inputs, config):
     if len(species) != 1:
         raise ValueError("a held-out dataset has queries of one species")
     chosen = signatures(config)
-    probability, up = target_predictions(dataset, dataset.target_queries(), chosen)
     return Prediction(
         ligand_scores(
             dataset,
@@ -163,6 +160,5 @@ def predict(inputs, config):
             dataset.ligand_universe(species[0]),
             chosen,
         ),
-        probability,
-        up,
+        target_predictions(dataset, dataset.target_queries(), chosen),
     )

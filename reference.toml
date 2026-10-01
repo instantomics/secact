@@ -9,7 +9,7 @@ draft = "candidate"
 
 [[integrations]]
 task_id = "ligand_activity"
-interface_id = "ligand_activity.candidate:1"
+interface_id = "ligand_activity.candidate:2"
 default_preset = "secact"
 
 [[integrations.presets]]
